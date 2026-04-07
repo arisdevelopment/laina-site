@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laina - Personal Agreement Tracker</title>
+  <meta name="description" content="Laina helps people keep track of personal agreements on WhatsApp. Record what was agreed, get confirmation, and never forget.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1a2e;
+      --paper: #faf9f6;
+      --warm: #e8e4dc;
+      --accent: #2d6a4f;
+      --accent-light: #40916c;
+      --accent-glow: #d8f3dc;
+      --muted: #6b7280;
+      --border: #e5e2db;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    nav { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .logo { font-family: 'Fraunces', serif; font-weight: 800; font-size: 1.6rem; color: var(--accent); letter-spacing: -0.02em; }
+    .logo span { opacity: 0.4; font-weight: 400; font-size: 0.85rem; margin-left: 0.5rem; letter-spacing: 0.04em; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-left: 2rem; transition: color 0.2s; }
+    nav a:hover { color: var(--ink); }
+    .hero { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .hero h1 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 3.2rem; line-height: 1.15; letter-spacing: -0.03em; color: var(--ink); }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero p { margin-top: 1.5rem; font-size: 1.15rem; color: var(--muted); max-width: 440px; }
+    .cta-group { margin-top: 2.5rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; padding: 0.9rem 1.8rem; border-radius: 50px; font-size: 1rem; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+    .btn-secondary { color: var(--muted); font-size: 0.95rem; text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.2s; }
+    .btn-secondary:hover { color: var(--ink); }
+    .phone-mockup { background: #fff; border-radius: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04); padding: 2rem 1.8rem; max-width: 340px; justify-self: center; border: 1px solid var(--border); }
+    .chat-bubble { padding: 0.8rem 1rem; border-radius: 16px; font-size: 0.88rem; line-height: 1.5; margin-bottom: 0.6rem; max-width: 90%; animation: fadeUp 0.5s ease both; }
+    .chat-bubble:nth-child(1) { animation-delay: 0.2s; }
+    .chat-bubble:nth-child(2) { animation-delay: 0.6s; }
+    .chat-bubble:nth-child(3) { animation-delay: 1.0s; }
+    .chat-bubble:nth-child(4) { animation-delay: 1.4s; }
+    .bubble-laina { background: var(--accent-glow); color: var(--ink); border-bottom-left-radius: 4px; }
+    .bubble-user { background: #fff; border: 1px solid var(--border); color: var(--ink); margin-left: auto; border-bottom-right-radius: 4px; }
+    .bubble-confirm { background: var(--accent); color: #fff; text-align: center; border-radius: 50px; padding: 0.6rem 1.2rem; font-weight: 600; font-size: 0.85rem; margin: 0.8rem auto 0; display: block; width: fit-content; animation: fadeUp 0.5s ease both; animation-delay: 1.8s; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .how { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 5rem 2rem; }
+    .how-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.8rem; }
+    .how h2 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 2.2rem; letter-spacing: -0.02em; margin-bottom: 3rem; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .step-number { font-family: 'Fraunces', serif; font-weight: 800; font-size: 3rem; color: var(--accent-glow); line-height: 1; margin-bottom: 0.8rem; }
+    .step h3 { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .step p { color: var(--muted); font-size: 0.95rem; }
+    .trust { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+    .trust h2 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 2.2rem; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .trust > p { color: var(--muted); font-size: 1.05rem; max-width: 600px; margin-bottom: 3rem; }
+    .trust-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .trust-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem; }
+    .trust-card h4 { font-weight: 600; margin-bottom: 0.4rem; }
+    .trust-card p { color: var(--muted); font-size: 0.92rem; }
+    .trust-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+    .about { background: var(--warm); padding: 5rem 2rem; }
+    .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about h2 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 2.2rem; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
+    .about p { color: var(--muted); font-size: 1rem; margin-bottom: 1rem; }
+    .about-detail { font-size: 0.9rem; color: var(--muted); }
+    .about-detail strong { color: var(--ink); font-weight: 600; }
+    .about-detail a { color: var(--accent); }
+    footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--ink); }
+    .footer-copy { color: var(--muted); font-size: 0.82rem; opacity: 0.7; }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem 2rem; gap: 2.5rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .phone-mockup { justify-self: start; }
+      .steps { grid-template-columns: 1fr; gap: 2rem; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+      nav { flex-wrap: wrap; gap: 0.5rem; }
+      nav a { margin-left: 0; margin-right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Laina <span>by Aris Digital</span></div>
+    <div>
+      <a href="#how">How it works</a>
+      <a href="#trust">Security</a>
+      <a href="#about">About</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <h1>Write it down so <em>nobody forgets.</em></h1>
+      <p>Laina is a WhatsApp-based personal agreement tracker. When someone agrees to pay you back — or you agree to pay them — Laina writes it down, gets confirmation, and sends gentle reminders.</p>
+      <div class="cta-group">
+        <a href="https://wa.me/15556414065?text=Hi" class="btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Message Laina on WhatsApp
+        </a>
+        <a href="#how" class="btn-secondary">See how it works</a>
+      </div>
+    </div>
+    <div class="phone-mockup">
+      <div class="chat-bubble bubble-laina">Hi Sarah 🙂 I'm Laina. When someone agrees to pay you back, or you agree to pay them — I write it down so nobody forgets.</div>
+      <div class="chat-bubble bubble-user">David agreed to pay me back $500</div>
+      <div class="chat-bubble bubble-laina">All done 👍 I've let David know.<br><br>$500, 2 monthly payments, first one on 6 May.<br><br>Once David confirms, I'll keep track for both of you.</div>
+      <div class="chat-bubble bubble-laina">David confirmed 🤝 You're both on the same page.</div>
+      <div class="bubble-confirm">✓ Agreement recorded</div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="how-inner">
+      <div class="section-label">How it works</div>
+      <h2>Three steps. No app to download.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3>Record the agreement</h3>
+          <p>Message Laina on WhatsApp with the details — who, how much, and how many payments. Takes 30 seconds.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3>They confirm</h3>
+          <p>The other person gets a message to confirm. Once they agree, both of you have a timestamped, verified record.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3>Laina keeps track</h3>
+          <p>Gentle reminders before each payment day. Mark payments as done. Both sides see the same record, always.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust" id="trust">
+    <div class="section-label">Built for trust</div>
+    <h2>Your agreements. Your data. Protected.</h2>
+    <p>Laina doesn't move money or process payments. We simply keep a clear, honest record of what two people agreed on.</p>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <span class="trust-icon">🔒</span>
+        <h4>Tamper-proof records</h4>
+        <p>Every event is cryptographically secured. If anyone tries to change a record, it's immediately detectable — keeping your agreements honest and verifiable.</p>
+      </div>
+      <div class="trust-card">
+        <span class="trust-icon">🕐</span>
+        <h4>Timestamped everything</h4>
+        <p>Creation, confirmation, payments, reminders — every action is logged with an exact timestamp. Nothing can be backdated.</p>
+      </div>
+      <div class="trust-card">
+        <span class="trust-icon">🤝</span>
+        <h4>Both sides confirm</h4>
+        <p>An agreement only becomes active when both people confirm. Nobody can create a one-sided claim.</p>
+      </div>
+      <div class="trust-card">
+        <span class="trust-icon">🛡️</span>
+        <h4>Minimal data, maximum privacy</h4>
+        <p>We collect only what's needed — phone numbers and agreement details. No unnecessary personal data. No selling your information. Ever.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div>
+        <div class="section-label">About Laina</div>
+        <h2>Built for communities that run on trust.</h2>
+        <p>In communities across Southern Africa and beyond, people help each other every day. Money is lent at church, at work, between neighbours. The problem isn't trust — it's memory. Laina exists so that good intentions don't get lost to forgetfulness.</p>
+        <p>We don't replace trust between people. We just make sure everyone remembers what they agreed on.</p>
+      </div>
+      <div>
+        <div class="section-label">Company</div>
+        <div class="about-detail">
+          <p><strong>Operated by</strong><br>Aris Digital Ltd</p>
+          <p><strong>Contact</strong><br><a href="mailto:hello@aris-digital.com">hello@aris-digital.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="mailto:hello@aris-digital.com">Contact</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Aris Digital Ltd. All rights reserved. Laina does not move money, process payments, or provide financial advice.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
