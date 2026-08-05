@@ -106,7 +106,9 @@
     <p>We keep information only for as long as it is reasonably needed for the purpose for which it was collected and for applicable legal, security, dispute, and evidence-preservation requirements.</p>
     <ul>
       <li><strong>Agreement and event records</strong> are kept while the agreement is active and afterwards for the period reasonably needed to provide the shared history, answer disputes, and meet legal obligations.</li>
-      <li><strong>Operational message records, duplicate-prevention identifiers, logs, and temporary copies held by the email provider</strong> are kept for shorter operational periods unless a failure, security incident, legal hold, or lawful request requires longer retention.</li>
+      <li><strong>Completed or failed operational message records and duplicate-prevention identifiers</strong> are routinely removed after six calendar months. Messages still waiting to be processed are excluded from that routine deletion.</li>
+      <li><strong>Application logs</strong> are redacted and kept under our current hosting plan's rolling period, which is currently seven days.</li>
+      <li><strong>Email data held by Resend</strong> is kept for its standard 30-day period. Laina keeps the report request and delivery record but does not store the PDF file in Supabase Storage. A copy in the recipient's mailbox is controlled by the recipient and their email provider.</li>
       <li><strong>Aggregated statistics</strong> may be kept longer when they no longer identify you.</li>
     </ul>
     <p>When retention is no longer justified, information is deleted or de-identified where appropriate. You may ask us how the current retention rule applies to a particular record.</p>
